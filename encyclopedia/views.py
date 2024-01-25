@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from markdown import markdown
+from markdown2 import markdown
 from . import util
 
 
@@ -10,6 +10,10 @@ def index(request):
 
 def entry(request, name):
     content = util.get_entry(name)
+    if content == None:
+        return render(request, "encyclopedia/page_not_found.html", {
+            "title":name
+        })
     return render(request, "encyclopedia/entry.html", {
         "title": name,
         "content": markdown(content)
