@@ -24,7 +24,9 @@
 
 
 
-https://github.com/sohankancherla/stock-market-simulator/assets/30853467/a8de61d0-be3a-4927-8508-ea635f8772b2
+
+https://github.com/sohankancherla/wiki/assets/30853467/03e23d51-070e-45c5-8ebf-7290ba57349c
+
 
 
 
