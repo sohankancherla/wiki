@@ -16,7 +16,7 @@ def entry(request, name):
             "title":name
         })
     return render(request, "encyclopedia/entry.html", {
-        "title": name,
+        "title": name.title(),
         "content": markdown(content)
     })
 
@@ -30,3 +30,9 @@ def search(request):
         "entries": entries_matched,
         "search" : search
     })
+
+def new(request):
+    return render(request, "encyclopedia/new.html")
+
+def add(request):
+    entries = util.list_entries()
