@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from markdown2 import markdown
+import random
 from . import util
 
 
@@ -55,8 +56,6 @@ def add(request):
 def edit(request):
     title = request.POST.get('title', '')
     content = request.POST.get('content', '')
-    print("test")
-    print(title)
     return render(request, "encyclopedia/edit.html", {
         "title": title,
         "content": content
@@ -66,4 +65,9 @@ def save(request):
     title = request.GET.get('title', '')
     content = request.GET.get('content', '')
     util.save_entry(title, content)
+    return redirect("/"+title)
+
+def random_page(request):
+    entries = util.list_entries()
+    title = random.choice(entries)
     return redirect("/"+title)
