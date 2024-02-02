@@ -88,6 +88,6 @@ Visit http://localhost:8000 to access the application.
 
 ## Acknowledgements
 
-* [CS50](https://cs50.harvard.edu/x/2023/)
+* [CS50](https://cs50.harvard.edu/web/2020/)
 
 
