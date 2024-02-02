@@ -44,7 +44,6 @@ def add(request):
     entries = util.list_entries()
     entries_lower = [entry.lower() for entry in entries]
     title = request.GET.get('title', '')
-    print(title)
     content = request.GET.get('content', '')
     if title.lower() in entries_lower:
         return render(request, "encyclopedia/page_exists.html", {
@@ -54,4 +53,17 @@ def add(request):
     return redirect("/"+title)
 
 def edit(request):
-    pass
+    title = request.POST.get('title', '')
+    content = request.POST.get('content', '')
+    print("test")
+    print(title)
+    return render(request, "encyclopedia/edit.html", {
+        "title": title,
+        "content": content
+    })
+
+def save(request):
+    title = request.GET.get('title', '')
+    content = request.GET.get('content', '')
+    util.save_entry(title, content)
+    return redirect("/"+title)

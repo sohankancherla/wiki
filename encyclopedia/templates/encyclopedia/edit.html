@@ -1,0 +1,22 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <h1>Edit Page</h1>
+
+    <form action="{% url 'save-page' %}">
+        {% csrf_token %}
+        <div class="vertical-container">
+            <input class="form-control" id="title-input" type="text" name="title" placeholder="Enter Title" value="{{ title }}" onkeypress="return event.key != 'Enter';" readonly>
+            <textarea class="form-control" name="content" id="markdown" rows="20" placeholder="Enter Markdown">{{ content }}</textarea>
+            <div class="button-container">
+                <a href="{% url 'index' %}" type="button" class="btn btn-danger" role="button">Cancel</a>
+                <button type="sumbit" class="btn btn-success">Save</button>
+            </div>
+        </div>
+    </form>    
+
+{% endblock %}
