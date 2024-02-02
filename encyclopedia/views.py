@@ -11,22 +11,26 @@ def index(request):
 
 def entry(request, name):
     content = util.get_entry(name)
+    entries = util.list_entries()
     if content == None:
         return render(request, "encyclopedia/page_not_found.html", {
-            "title":name
+            "title": name
         })
+    for entry in entries:
+        if name.lower() == entry.lower():
+            name = entry
     return render(request, "encyclopedia/entry.html", {
-        "title": name.title(),
-        "content": markdown(content)
+        "title": name,
+        "content": markdown(content),
+        "text_content": content
     })
 
 def search(request):
     entries = util.list_entries()
     entries_lower = [entry.lower() for entry in entries]
-    print(entries_lower)
     search = request.GET.get('q', '')
     if search.lower() in entries_lower:
-        return redirect("/"+search.lower())
+        return redirect("/"+search)
     entries_matched = [entry for entry in entries if search.lower() in entry.lower()]
     return render(request, "encyclopedia/search.html", {
         "entries": entries_matched,
@@ -48,3 +52,6 @@ def add(request):
         })
     util.save_entry(title, content)
     return redirect("/"+title)
+
+def edit(request):
+    pass
