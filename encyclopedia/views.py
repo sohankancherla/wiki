@@ -22,8 +22,10 @@ def entry(request, name):
 
 def search(request):
     entries = util.list_entries()
+    entries_lower = [entry.lower() for entry in entries]
+    print(entries_lower)
     search = request.GET.get('q', '')
-    if search in entries:
+    if search.lower() in entries_lower:
         return redirect("/"+search.lower())
     entries_matched = [entry for entry in entries if search.lower() in entry.lower()]
     return render(request, "encyclopedia/search.html", {
@@ -36,10 +38,13 @@ def new(request):
 
 def add(request):
     entries = util.list_entries()
+    entries_lower = [entry.lower() for entry in entries]
     title = request.GET.get('title', '')
     print(title)
     content = request.GET.get('content', '')
-    if title in entries:
+    if title.lower() in entries_lower:
         return render(request, "encyclopedia/page_exists.html", {
             "title":title
         })
+    util.save_entry(title, content)
+    return redirect("/"+title)
