@@ -36,3 +36,10 @@ def new(request):
 
 def add(request):
     entries = util.list_entries()
+    title = request.GET.get('title', '')
+    print(title)
+    content = request.GET.get('content', '')
+    if title in entries:
+        return render(request, "encyclopedia/page_exists.html", {
+            "title":title
+        })
